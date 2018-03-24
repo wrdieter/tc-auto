@@ -9,11 +9,27 @@ import subprocess
 import yaml
 
 def main():
-    parser = argparse.ArgumentParser(description="Batch transcode MKV files into mp4's")
+    parser = argparse.ArgumentParser(description="""\
+Batch transcode MKV files into mp4's suitable for import to Plex
+
+Search all directories in input-dir for directories of MKV files, and then
+transcode the contents of those directories, giving the largest file the
+same name as the directory and storing the remaining files in a subdirectory
+called "Behind The Scenes".  The resulting directory is copied to output-dir,
+and the original input directory is copied to archive-dir.
+
+Wthe main title, and the remaining tracks will appear as "Behind the
+Scenes" extras.hen the directories in input-dir are in the form "Title
+(Year)" and output-dir is a directory that Plex searches for movies, the
+largest video will appear in Plex as the main title, and the remaining
+tracks will appear as "Behind the Scenes" extras.
+""")
     parser.add_argument('--input-dir', default='incoming',
-                        help='Directory containing mkv files to be transcoded')
+                        help='Directory containing mkv files to be
+                        transcoded')
     parser.add_argument('--output-dir', default='Movies',
-                        help='Directory in which to write transcoded files')
+                        help='Directory in which to write transcoded
+                        files')
     parser.add_argument('--archive-dir', default='loaded',
                         help='Directory in which to place source of '
                              'sucessfully transcoded files')
